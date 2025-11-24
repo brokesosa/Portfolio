@@ -1,0 +1,126 @@
+body{
+    background-image: url("../img/fond1.jpg");
+    background-size: cover;
+    height: 100vh;
+    position: fixed;
+}
+
+.top-left{
+  position: fixed;
+  top: 25px;
+  left: 25px;
+  z-index: 2000;
+  pointer-events: auto;
+  background: linear-gradient(50deg, #ffffff, #888888);
+  padding: 4px 4px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #333;
+}
+.top-left .home-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #333;
+  background-image: url(../img/home.png);
+  background-size: cover;
+  padding: 24px 26px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.top-left .home-link:hover{ transform: translateY(-2px); }
+nav {
+    position: fixed;
+    bottom: 200px;
+    right: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: rgba(209, 198, 190, 0.6);
+    font-family: 'Arial', sans-serif;
+    font-size: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+nav div {
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+    opacity: 0.8;
+}
+
+nav div:hover {
+    transform: scale(1.1);
+    color: #DAA520;
+    opacity: 1;
+}
+
+nav a {
+    color: rgba(254, 254, 254, 0.87);
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+nav a::after {
+    right: -50px;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateX(-10px);
+}
+
+nav a:hover {
+    color: #ffff00;
+}
+
+nav a:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+    color: #fbff00;
+}
+/* Style de l'image animée */
+.moving-image {
+    position: fixed;
+    top: 30%;
+    width: 120px;
+    height: 130px;
+    background-image: url(../img/goku.png);
+    background-size: cover;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    right: -150px; 
+}
+
+@keyframes moveRightToLeft {
+    0% {
+        right: -150px;
+        opacity: 0;
+        transform: translateY(0px) scale(0.8);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
+    30% {
+        transform: translateY(100px);
+    }
+    50% {
+        transform: translateY(-60px);
+    }
+    80% {
+        transform: translateY(85px);
+    }
+
+    100% {
+        right: 100%;
+        transform: translateY(40px) scale(0.9);
+    }
+}

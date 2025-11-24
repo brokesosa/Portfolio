@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Tyméo</title>
+    <link rel="stylesheet" href="./css/style4.css">
+</head>
+<body>
+    <div class="top-left">
+  <a href="index.html" class="home-link" aria-label="Accueil">
+  </a>
+</div>
+    <div class="contact-container">
+        <!-- 1. En-tête / Titre -->
+        <header class="contact-header">
+            <h1 class="contact-title">Contactez-moi</h1>
+            <p class="contact-subtitle">
+                Vous souhaitez échanger sur un projet, une opportunité ou simplement discuter ? 
+                Je suis toujours ouvert à la conversation.
+            </p>
+        </header>
+
+        <!-- 2. Formulaire de contact -->
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name" class="form-label">Nom</label>
+                <input type="text" id="name" class="form-input" placeholder="Votre nom complet" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Adresse e-mail</label>
+                <input type="email" id="email" class="form-input" placeholder="votre@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject" class="form-label">Objet du message</label>
+                <input type="text" id="subject" class="form-input" placeholder="Sujet de votre message">
+            </div>
+
+            <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" class="form-textarea" placeholder="Votre message..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Envoyer le message</button>
+        </form>
+
+        <section class="direct-links">
+            <h3 class="links-title">Retrouvez-moi aussi sur :</h3>
+            <div class="links-grid">
+                <a href="mailto:tymeo@exemple.fr" class="link-item" id="mail">
+                </a>
+                <a href="#" class="link-item" id="in">
+                </a>
+                <a href="https://discord.gg/CzhhMzca" class="link-item" id="discord">
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Import des scripts -->
+    <script type="module" src="./js/firebase-config.js"></script>
+    <script type="module" src="./js/contact-form.js"></script>
+    <script type="module">
+        import { initContactForm } from './js/contact-form.js';
+        
+        // Initialiser le formulaire quand la page est chargée
+        document.addEventListener('DOMContentLoaded', function() {
+            initContactForm();
+        });
+    </script>
+</body>
+</html>
