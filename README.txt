@@ -1,20 +1,24 @@
 # 🚀 Portfolio Développeur
 
 ## 📋 À PROPOS
-Portfolio dynamique présentant mes projets et compétences en développement web. Interface moderne avec formulaire de contact fonctionnel.
+Portfolio web présentant mes projets et compétences en développement web. Interface moderne avec formulaire de contact fonctionnel.
 
 ## 🛠️ TECHNOLOGIES
 - **Frontend** : HTML5, CSS3, JavaScript
-- **Backend** : Firebase (Firestore, Authentication)
+- **Backend** : Firebase (Firestore,(Authentification à venir))
 - **Outils** : Vite, Git, GitHub
-- **Déploiement** : GitHub Pages / Netlify
 
 ## 🚀 INSTALLATION & LANCEMENT
-      DANS LE DOSSIER AVEC CMD
+
+Ouvrez le dossier extrait du zip dans votre invite de commande
+
+exemple : cd C:\Users\"VotrePseudo"\Downloads\Portfolio-master
+
 # Installation des dépendances
 npm install
 
 # Lancement du serveur de développement
 npm run dev
 
-# Ouvrez http://localhost:**** dans votre navigateur
+
+# Ouvrez http://localhost:5173 dans votre navigateur
