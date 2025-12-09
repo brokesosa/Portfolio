@@ -1,8 +1,64 @@
 body{
-    background-image: url("../img/fond1.jpg");
+    background: #1100fc;
+    background: linear-gradient(180deg, rgba(17, 0, 252, 1) 0%, rgba(50, 50, 252, 1) 10%, rgba(0, 212, 255, 1) 31%, rgba(0, 221, 255, 1) 79%, rgba(182, 252, 252, 1) 100%);
     background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100vh;
     position: fixed;
+}
+
+/* ========================================
+   CAROUSEL - Deux lignes d'images
+   ======================================== */
+.carousel-container {
+    position: fixed;
+    top: 120px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel-row {
+    position: relative;
+    width: 100%;
+    height:220px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.carousel-track {
+    display: flex;
+    gap: 0;
+    animation: scrollLeft 10s linear infinite;
+    will-change: transform;
+}
+
+.carousel-track-2 {
+    animation: scrollLeft 10s linear infinite reverse;
+}
+
+.carousel-track img {
+    
+    width: 200px;
+    height: 220px;
+    object-fit: cover;
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 .top-left{
@@ -38,7 +94,7 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    color: rgba(209, 198, 190, 0.6);
+    color: rgb(255, 255, 255);
     font-family: 'Arial', sans-serif;
     font-size: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -47,7 +103,6 @@ nav {
 nav div {
     cursor: pointer;
     transition: transform 0.3s, color 0.3s;
-    opacity: 0.8;
 }
 
 nav div:hover {
@@ -57,7 +112,7 @@ nav div:hover {
 }
 
 nav a {
-    color: rgba(254, 254, 254, 0.87);
+    color: rgb(255, 255, 255);
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
@@ -122,5 +177,667 @@ nav a:hover::after {
     100% {
         right: 100%;
         transform: translateY(40px) scale(0.9);
+    }
+}
+
+.background-text {
+    position: fixed;
+    top: 36%;
+    left: 29%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    white-space: nowrap;
+    z-index: 0;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 6px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    text-align: center;
+    line-height: 1.2;
+    white-space: normal;
+}
+
+/* ========================================
+   ONGLET ANIMÉ EN BAS DE PAGE
+   ======================================== */
+
+.sliding-tab {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    z-index: 100;
+    transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+}
+
+/* État déployé */
+.sliding-tab.expanded {
+    height: 100vh;
+    z-index: 1400;
+    pointer-events: auto;
+}
+
+/* En-tête de l'onglet (toujours visible) */
+.tab-header {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(40, 40, 60, 0.98) 100%);
+    border-top: 2px solid rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    cursor: pointer;
+    z-index: 11;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    user-select: none;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+    pointer-events: auto;
+}
+
+/* En-tête quand déployé */
+.sliding-tab.expanded .tab-header {
+    position: fixed;
+    top: 0;
+    bottom: auto;
+    height: 40px;
+    border-top: none;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    padding: 0 30px;
+}
+
+.tab-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    transition: font-size 0.4s ease;
+    text-transform: uppercase;
+}
+
+.sliding-tab.expanded .tab-text {
+    font-size: 18px;
+}
+
+/* Flèche directionnelle */
+.tab-arrow {
+    font-size: 18px;
+    color: #ffffff;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-block;
+}
+
+.sliding-tab.expanded .tab-arrow {
+    transform: rotate(180deg);
+}
+
+/* Contenu de l'onglet déployé */
+.tab-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                visibility 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tab-content::-webkit-scrollbar {
+    width: 0;
+}
+
+.tab-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.sliding-tab.expanded .tab-content {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Arrière-plan avec GIF */
+.tab-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/trunks3.gif");
+     background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+}
+
+/* Calque semi-transparent sur le GIF */
+.tab-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+     background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    position: fixed;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+    z-index: 2;
+}
+
+/* Contenu intérieur */
+.tab-inner-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #ffffff;
+    text-align: center;
+    animation: fadeInContent 0.8s ease 0.2s both;
+    pointer-events: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-inner-content h2 {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+.tab-inner-content p {
+    font-size: 17px;
+    margin: 0 0 40px 0;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+}
+
+.tab-calendrier {
+    font-size: 8px;
+    border-radius: 20px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TABLETTES
+   ======================================== */
+
+@media (max-width: 768px) {
+    .sliding-tab {
+        height: 25px;
+    }
+
+    .tab-header {
+        height: 25px;
+        padding: 0 15px;
+        font-size: 12px;
+    }
+
+    .sliding-tab.expanded .tab-header {
+        height: 35px;
+        padding: 0 20px;
+    }
+
+    .tab-text {
+        font-size: 12px;
+    }
+
+    .sliding-tab.expanded .tab-text {
+        font-size: 16px;
+    }
+
+    .tab-arrow {
+        font-size: 16px;
+    }
+
+    .tab-content {
+        bottom: 25px;
+        height: calc(100vh - 25px);
+    }
+
+    .sliding-tab.expanded .tab-content {
+        bottom: 35px;
+        height: calc(100vh - 35px);
+    }
+
+    .tab-inner-content h2 {
+        font-size: 36px;
+        margin: 0 0 15px 0;
+    }
+
+    .tab-inner-content p {
+        font-size: 16px;
+        margin: 0 0 30px 0;
+    }
+
+    .tab-close-hint {
+        font-size: 12px;
+        margin-top: 30px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILES
+   ======================================== */
+
+@media (max-width: 480px) {
+    .sliding-tab {
+        height: 22px;
+    }
+
+    .tab-header {
+        height: 22px;
+        padding: 0 12px;
+    }
+
+    .sliding-tab.expanded .tab-header {
+        height: 30px;
+        padding: 0 15px;
+    }
+
+    .tab-text {
+        font-size: 11px;
+    }
+
+    .sliding-tab.expanded .tab-text {
+        font-size: 14px;
+    }
+
+    .tab-arrow {
+        font-size: 14px;
+    }
+
+    .tab-content {
+        bottom: 22px;
+        height: calc(100vh - 22px);
+    }
+
+    .sliding-tab.expanded .tab-content {
+        bottom: 30px;
+        height: calc(100vh - 30px);
+    }
+
+    .tab-inner-content h2 {
+        font-size: 28px;
+        margin: 0 0 12px 0;
+    }
+
+    .tab-inner-content p {
+        font-size: 14px;
+        margin: 0 0 20px 0;
+        padding: 0 15px;
+    }
+
+    .tab-close-hint {
+        font-size: 11px;
+        margin-top: 20px;
+    }
+}
+
+/* ========================================
+   GRILLE DE CALENDRIER (3 COLONNES)
+   ======================================== */
+
+.tab-calendrier {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    align-items: start;
+    
+}
+
+.tab-calendrier section {
+    background: linear-gradient(135deg, rgba(102, 149, 195, 0.15) 0%, rgba(150, 100, 200, 0.1) 100%);
+    border: 2px solid rgb(100, 150, 200);
+    border-radius: 12px;
+    padding: 24px;
+    min-height: 170px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.tab-calendrier section:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgb(0, 128, 255);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.tab-calendrier section h3 {
+    margin: 0 0 12px 0;
+    font-size: 20px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.tab-calendrier section p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+/* ========================================
+   RESPONSIVE - TABLETTES (2 colonnes)
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .tab-calendrier {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding: 0 15px;
+    }
+
+    .tab-calendrier section {
+        padding: 18px;
+    }
+
+    .tab-calendrier section h3 {
+        font-size: 18px;
+    }
+
+    .tab-calendrier section p {
+        font-size: 13px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILES (1 colonne)
+   ======================================== */
+
+@media (max-width: 640px) {
+    .tab-calendrier {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 12px;
+        margin: 20px auto;
+    }
+
+    .tab-calendrier section {
+        padding: 16px;
+    }
+
+    .tab-calendrier section h3 {
+        font-size: 16px;
+        margin: 0 0 10px 0;
+    }
+
+    .tab-calendrier section p {
+        font-size: 12px;
+        margin: 6px 0;
+    }
+}
+
+/* ========================================
+   SECTION D'INVITATION DE CONTACT
+   ======================================== */
+
+.contact-invitation {
+    width: 100%;
+    margin: 60px 0 40px 0;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.invitation-content {
+    background: linear-gradient(135deg, rgba(100, 150, 200, 0.15) 0%, rgba(150, 100, 200, 0.1) 100%);
+    border: 2px solid rgb(100, 150, 200);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 700px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.invitation-content:hover {
+    background: linear-gradient(135deg, rgba(100, 150, 200, 0.25) 0%, rgba(150, 100, 200, 0.2) 100%);
+    border-color: rgb(0, 128, 255);
+    box-shadow: 0 8px 32px rgba(100, 150, 200, 0.2);
+    transform: translateY(-5px);
+}
+
+.invitation-content h3 {
+    margin: 0 0 15px 0;
+    font-size: 28px;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.invitation-content p {
+    margin: 0 0 25px 0;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+.contact-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6495ed 0%, #9370db 100%);
+    color: #ffffff;
+    padding: 14px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(100, 150, 200, 0.3);
+    text-transform: uppercase;
+}
+
+.contact-btn:hover {
+    background: linear-gradient(135deg, #9370db 0%, #6495ed 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(100, 150, 200, 0.5);
+}
+
+.contact-btn:active {
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   RESPONSIVE - TABLETTES
+   ======================================== */
+
+@media (max-width: 768px) {
+    .contact-invitation {
+        margin: 40px 0 30px 0;
+        padding: 30px 15px;
+    }
+
+    .invitation-content {
+        padding: 30px;
+    }
+
+    .invitation-content h3 {
+        font-size: 22px;
+        margin: 0 0 12px 0;
+    }
+
+    .invitation-content p {
+        font-size: 14px;
+        margin: 0 0 20px 0;
+    }
+
+    .contact-btn {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILES
+   ======================================== */
+
+@media (max-width: 480px) {
+    .contact-invitation {
+        margin: 30px 0 20px 0;
+        padding: 20px 10px;
+    }
+
+    .invitation-content {
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .invitation-content h3 {
+        font-size: 18px;
+        margin: 0 0 10px 0;
+    }
+
+    .invitation-content p {
+        font-size: 13px;
+        margin: 0 0 15px 0;
+    }
+
+    .contact-btn {
+        padding: 11px 25px;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE MOBILE - NAV ET BACKGROUND TEXT
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Navigation responsive */
+    nav {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        gap: 10px;
+        font-size: 20px;
+        z-index: 200;
+    }
+
+    nav a {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+
+    /* Texte de fond responsive */
+    .background-text {
+        top: 40%;
+        left: 50%;
+        font-size: 32px;
+        letter-spacing: 4px;
+    }
+
+    .moving-image {
+        width: 80px;
+        height: 85px;
+        top: 25%;
+        
+    }
+}
+
+@media (max-width: 480px) {
+    /* Navigation très petits écrans */
+    nav {
+        position: fixed;
+        bottom: 80px;
+        right: 10px;
+        gap: 8px;
+        font-size: 16px;
+    }
+
+    nav a {
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+    }
+
+    nav div {
+        transition: transform 0.3s;
+    }
+
+    nav div:hover {
+        transform: scale(1.05);
+    }
+
+    /* Texte de fond très petit écran */
+    .background-text {
+        top: 45%;
+        left: 50%;
+        font-size: 24px;
+        letter-spacing: 3px;
+    }
+
+    .background-text div {
+        line-height: 1.1;
+    }
+
+    .moving-image {
+        width: 60px;
+        height: 65px;
+        top: 30%;
+        
+    }
+
+    /* Top left responsive */
+    .top-left {
+        top: 12px;
+        left: 12px;
+    }
+
+    .top-left .home-link {
+        padding: 15px 18px;
+        font-size: 11px;
     }
 }

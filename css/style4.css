@@ -43,7 +43,7 @@
 
 .top-left .home-link:hover{ transform: translateY(-2px); }
         .contact-container {
-            background: linear-gradient(130deg, #91949c, #000000);
+            background: linear-gradient(130deg, #6198ffe9, #ffffffe6);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
@@ -68,7 +68,7 @@
 
         .contact-subtitle {
             font-size: 1.1rem;
-            color: #c7c5c5;
+            color: #131416;
             line-height: 1.6;
         }
 
@@ -139,7 +139,7 @@
         .links-title {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #c7c5c5;
+            color: #080808;
             margin-bottom: 20px;
         }
 
@@ -150,7 +150,7 @@
             margin-bottom: 10px;
         }
 
-        .link-item {;
+        .link-item {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -211,4 +211,32 @@
         .info-label {
             font-weight: 600;
             color: #333;
+        }
+
+        /* ===== Media queries responsives: desktop 1920px, tablette, mobile, petits écrans ===== */
+
+        @media (min-width: 1920px) {
+            .contact-container { max-width: 1000px; padding: 48px; }
+            .contact-title { font-size: 3rem; }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .contact-container { padding: 30px; max-width: 720px; }
+            .contact-title { font-size: 2rem; }
+            .links-grid { gap: 12px; }
+            .link-item { padding: 24px; }
+        }
+
+        @media (max-width: 767px) {
+            body { padding: 12px; background-attachment: scroll; background-position: center center; background-repeat: no-repeat; }
+            .contact-container { padding: 20px; border-radius: 14px; }
+            .contact-title { font-size: 1.6rem; }
+            .links-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .link-item { padding: 14px; }
+        }
+
+        @media (max-width: 360px) {
+            .contact-subtitle { font-size: 0.95rem; }
+            .link-text { font-size: 0.8rem; }
+            .link-item { padding: 10px; }
         }
