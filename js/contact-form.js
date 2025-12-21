@@ -3,22 +3,27 @@ import { db, collection, addDoc, serverTimestamp } from './firebase-config.js';
 
 export function initContactForm() {
     const contactForm = document.querySelector('.contact-form');
-    
+
     if (!contactForm) return; // Si le formulaire n'existe pas sur la page
-    
+
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
+
         const submitBtn = this.querySelector('.submit-btn');
         const originalText = submitBtn.textContent;
-        
+
         // Récupération des valeurs
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const subject = document.getElementById('subject').value;
         const message = document.getElementById('message').value;
-        
+
         try {
+            // Check if Firebase is properly configured
+            if (!db) {
+                throw new Error('Firebase is not configured. Please set up the required environment variables.');
+            }
+
             // Animation de chargement
             submitBtn.textContent = 'Envoi en cours...';
             submitBtn.disabled = true;
@@ -37,7 +42,7 @@ export function initContactForm() {
             // Succès
             showNotification('Message envoyé avec succès ! Je vous répondrai rapidement.', 'success');
             this.reset();
-            
+
         } catch (error) {
             console.error("Erreur d'envoi:", error);
             showNotification('Erreur lors de l\'envoi. Veuillez réessayer.', 'error');
