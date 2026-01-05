@@ -3,22 +3,63 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-analytics.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID,
-  measurementId: import.meta.env.VITE_MEASUREMENT_ID
-};
+let app;
+let analytics;
+let db;
+let initialized = false;
+let initPromise = null;
 
+// Fetch Firebase config from serverless function at runtime
+async function fetchFirebaseConfig() {
+  const response = await fetch('/api/firebase-config');
+  if (!response.ok) {
+    throw new Error('Failed to fetch Firebase configuration');
+  }
+  return response.json();
+}
 
+// Initialize Firebase asynchronously
+async function initializeFirebase() {
+  if (initialized) {
+    return { app, analytics, db };
+  }
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(app);
-export const db = getFirestore(app);
+  if (initPromise) {
+    return initPromise;
+  }
 
-// Exporte les fonctions Firebase dont tu as besoin
+  initPromise = (async () => {
+    const firebaseConfig = await fetchFirebaseConfig();
+
+    app = initializeApp(firebaseConfig);
+    analytics = getAnalytics(app);
+    db = getFirestore(app);
+    initialized = true;
+
+    return { app, analytics, db };
+  })();
+
+  return initPromise;
+}
+
+// Export a promise that resolves to the Firebase instances
+export const firebaseReady = initializeFirebase();
+
+// Export getters that wait for initialization
+export async function getApp() {
+  await firebaseReady;
+  return app;
+}
+
+export async function getAnalyticsInstance() {
+  await firebaseReady;
+  return analytics;
+}
+
+export async function getDb() {
+  await firebaseReady;
+  return db;
+}
+
+// Export Firebase functions for convenience
 export { collection, addDoc, serverTimestamp };
